@@ -1,7 +1,4 @@
-from cgitb import text
-from email import message
 from tkinter import messagebox
-from turtle import width
 from selenium import webdriver
 from tkinter import *
 from tkinter import filedialog
@@ -24,6 +21,7 @@ mensagem = []
 # Midia = imagem, pdf, documentos e videos
 midia = []
 
+# estamos validando o campo contato
 def validarcontato():
     if len (inputcontato.get()) != 0 :
         selecionarcontato()
@@ -32,42 +30,58 @@ def validarcontato():
         return ()
           
 
+# pegando o contato da array
 def selecionarcontato():
     contatos.append(inputcontato.get())
     print(contatos)
     inputcontato.delete(0,"end")
     listarcontatos["text"] = ', '.join(contatos)
     
+    
+# criando o botão para remover os contatos 
 def removercontato():
     contatos.clear()
     print(contatos) 
-    listarcontatos ["text"] = ""
-    
+    listarcontatos["text"] = ""
+
+
+# estamos validando o campo mensagem
 def validarmensagen():
     if len (inputmensagem.get("1.0","end-1c")) != 0 :
         selecionarmensagem()
     else : 
         messagebox.showerror("Error","digite um mensagem")
-        return ()    
-
+        return ()   
+    
+     
+# pegando a mensagem da array
 def selecionarmensagem():
     mensagem.append(inputmensagem.get("1.0","end-1c"))
     print(mensagem)
-    
+
+
+# criando o botão para remover a mensagem
 def removermensagem():
     mensagem.clear()
     print(mensagem)  
     
-  
+    
+# caminha para adicionar a imagem 
 def selecionarimagem():
     imagem=filedialog.askopenfilename(initialdir="/",title="imagem",filetypes=(("imgfiles",["png","jpeg","jpg"]),("all files","*.*")))
     midia.append(imagem)    
     print(midia)
+    listarmidia["text"] = ', '.join(midia)
     
+    
+# removendo a imagem
 def removermidia():
     midia.clear()
-    print(midia)    
+    print(midia) 
+    listarmidia["text"] = ""   
     
+    
+# centralizando a janela do bot 
 def center(app):
     
     app.update_idletasks()
@@ -83,6 +97,7 @@ def center(app):
     app.deiconify()
     
     
+# validando o campo enviar caso esteja tudo em branco exibira um alerta 
 def validarenvio():
     if len (contatos) != 0 :
         if  len (inputmensagem.get("1.0","end-1c"))!=0 :
@@ -148,9 +163,10 @@ app.title = "botwhats"
 center(app)
 app.geometry("520x470")
 
-
-Label(app,text="ChatBot").place(x=10,y=20)
+# posicionando os botão
+Label(app,text="CHATBOT").place(x=230,y=20)
 Label(app,text="Digite seu contato:").place(x=10,y=70)
+Label(app,text="Arquivos permitidos * png, jpeg, jpg").place(x=225,y=420)
 inputcontato = Entry(app)
 inputcontato.place(x=120,y=70)
 Button(app,text="Adicionar contato", command=validarcontato).place(x=250,y=65)
@@ -165,6 +181,8 @@ Button(app,text="Remover mídia", command=removermidia).place(x=130,y=420)
 Button(app,text="Enviar", command=validarenvio).place(x=465,y=420)
 listarcontatos = Label (app,text="")
 listarcontatos.place (x=10,y=90)
+listarmidia = Label (app,text="")
+listarmidia.place (x=10,y=447)
 exitpagina = Button (app,text="Exit", command=app.destroy)
 exitpagina.place (x=425, y=420)
 app.mainloop()
