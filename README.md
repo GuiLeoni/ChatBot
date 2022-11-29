@@ -1,4 +1,4 @@
-## ChatBot
+## Índio Bot
 
 ### Guilherme Leoni Vidigal Tibúrcio, 16
 ### Henrique Bueno Rizzo, 16
